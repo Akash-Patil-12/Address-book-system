@@ -12,18 +12,22 @@ namespace Address_Book_System
             int zip,userChoice;
             long phoneNumber;
             List<Contacts> listContacts = new List<Contacts>();
+            //contacts
+            const int EXIT = 0, ADD_NEW_CONTACTS = 1, EDIT_CONTACTS = 2,ALL_CONTACTS=6;
 
             while (true)
             {
                 Console.WriteLine("Press 1 : Add new contacts to Address Book");
+                Console.WriteLine("Press 2 : Edit existing contact");
+                Console.WriteLine("Press 6 : Show all contacts");
                 Console.WriteLine("Press 0 : to Stop Execution");
                 Console.WriteLine("Enter your choice");
                 userChoice = Convert.ToInt32(Console.ReadLine());
-                if (userChoice == 0)
+                if (userChoice == EXIT)
                     break;
                 switch (userChoice)
                 {
-                    case 1:
+                    case ADD_NEW_CONTACTS:
                         GetUserData();
                         Contacts contacts = new Contacts()
                         {
@@ -38,15 +42,21 @@ namespace Address_Book_System
                         };
                         listContacts.Add(contacts);
                         break;
-                    
+                    case EDIT_CONTACTS:
+                        Contacts contact = new Contacts();
+                        contact.CheckContactAvaible(listContacts);
+                        break;
+                    case ALL_CONTACTS:
+                        Contacts contactAllRecord = new Contacts();
+                        contactAllRecord.ShowAllRecords(listContacts);
+                        break;
+                    default:
+                        Console.WriteLine("Enter a right choice");
+                        break;
+                            
 
                 }
-            }
-            foreach(Contacts contacts1 in listContacts)
-            {
-                Console.WriteLine("First name :" + contacts1.FirstName);
-            }
-              
+            }          
             void GetUserData()
             {
                 Console.WriteLine("Enter First Name");

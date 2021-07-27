@@ -6,7 +6,9 @@ namespace Address_Book_System
 {
     class Contacts
     {
+        //variables
         String firstName;
+        bool checkContacts;
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Address { get; set; }
@@ -15,10 +17,13 @@ namespace Address_Book_System
         public int Zip { get; set; }
         public long PhoneNumber { get; set; }
         public String Email { get; set; }
-
+        /// <summary>
+        /// Check contact available if it presents than edit in its data
+        /// </summary>
+        /// <param name="listContacts"></param>
         public void CheckContactAvaible(List<Contacts> listContacts)
         {
-            bool checkContacts = false;
+            checkContacts = false;
             Console.WriteLine("Enter first name");
             firstName = Console.ReadLine();
             foreach(Contacts contacts in listContacts)
@@ -41,13 +46,39 @@ namespace Address_Book_System
                     contacts.PhoneNumber = Convert.ToInt64(Console.ReadLine());
                     Console.WriteLine("Enter email");
                     contacts.Email = Console.ReadLine();
-                    Console.WriteLine("Record Updated successfully..");
+                    Console.WriteLine("Record Updated successfully...");
                     checkContacts = true;
                 }              
             }
             if (checkContacts == false)
                 Console.WriteLine("Record not present");
         }
+        /// <summary>
+        /// Delete specific record from contacts
+        /// </summary>
+        /// <param name="listContacts"></param>
+        public void DeleteContacts(List<Contacts> listContacts)
+        {
+            checkContacts = false;
+            Console.WriteLine("Enter first name");
+            firstName = Console.ReadLine();
+            foreach (Contacts contacts in listContacts)
+            {
+                if (contacts.FirstName.Equals(firstName))
+                {
+                    listContacts.Remove(contacts);
+                    Console.WriteLine("Record Deleted Successfully...");
+                    checkContacts = true;
+                    break;
+                }
+            }
+            if (checkContacts == false)
+                Console.WriteLine("Record not found");
+        }
+        /// <summary>
+        /// Show all record of contacts
+        /// </summary>
+        /// <param name="listContacts"></param>
         public void ShowAllRecords(List<Contacts> listContacts)
         {
             int count = 1;
@@ -55,7 +86,7 @@ namespace Address_Book_System
             {
                 foreach (Contacts contacts1 in listContacts)
                 {
-                    Console.WriteLine("Contact Record :" + count);
+                    Console.WriteLine("...Contact Record :" + count + "...");
                     Console.WriteLine("First name :" + contacts1.FirstName);
                     Console.WriteLine("Last name :" + contacts1.LastName);
                     Console.WriteLine("Address :" + contacts1.Address);
@@ -64,6 +95,7 @@ namespace Address_Book_System
                     Console.WriteLine("Zip :" + contacts1.Zip);
                     Console.WriteLine("Phone Number :" + PhoneNumber);
                     Console.WriteLine("Email :" + contacts1.Email);
+                    Console.WriteLine();
                     count++;
                 }
             }

@@ -11,15 +11,15 @@ namespace Address_Book_System
             string firstName,lastName,address,city,state,email;
             int zip,userChoice;
             long phoneNumber;
-            List<Contacts> listContacts = new List<Contacts>();
             //contacts
-            const int EXIT = 0, ADD_NEW_CONTACTS = 1, EDIT_CONTACTS = 2,ALL_CONTACTS=6;
-
+            const int EXIT = 0, ADD_NEW_CONTACTS = 1, EDIT_CONTACTS = 2,DELETE_CONTACTS=3,ALL_CONTACTS=5;
+            List<Contacts> listContacts = new List<Contacts>();
             while (true)
             {
                 Console.WriteLine("Press 1 : Add new contacts to Address Book");
                 Console.WriteLine("Press 2 : Edit existing contact");
-                Console.WriteLine("Press 6 : Show all contacts");
+                Console.WriteLine("Press 3 : Delete contact");
+                Console.WriteLine("Press 5 : Show all contacts");
                 Console.WriteLine("Press 0 : to Stop Execution");
                 Console.WriteLine("Enter your choice");
                 userChoice = Convert.ToInt32(Console.ReadLine());
@@ -50,11 +50,13 @@ namespace Address_Book_System
                         Contacts contactAllRecord = new Contacts();
                         contactAllRecord.ShowAllRecords(listContacts);
                         break;
+                    case DELETE_CONTACTS:
+                        Contacts contectDelete = new Contacts();
+                        contectDelete.DeleteContacts(listContacts);
+                        break;
                     default:
                         Console.WriteLine("Enter a right choice");
                         break;
-                            
-
                 }
             }          
             void GetUserData()

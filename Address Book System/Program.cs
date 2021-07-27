@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Address_Book_System
 {
@@ -6,21 +7,46 @@ namespace Address_Book_System
     {
         static void Main(string[] args)
         {
+            //variables
             string firstName,lastName,address,city,state,email;
-            int zip;
+            int zip,userChoice;
             long phoneNumber;
-            GetUserData();
-            Contacts contacts = new Contacts()
+            List<Contacts> listContacts = new List<Contacts>();
+
+            while (true)
             {
-                FirstName = firstName,
-                LastName = lastName,
-                Address=address,
-                City=city,
-                State=state,
-                Zip=zip,
-                PhoneNumber=phoneNumber,
-                Email=email
-            };  
+                Console.WriteLine("Press 1 : Add new contacts to Address Book");
+                Console.WriteLine("Press 0 : to Stop Execution");
+                Console.WriteLine("Enter your choice");
+                userChoice = Convert.ToInt32(Console.ReadLine());
+                if (userChoice == 0)
+                    break;
+                switch (userChoice)
+                {
+                    case 1:
+                        GetUserData();
+                        Contacts contacts = new Contacts()
+                        {
+                            FirstName = firstName,
+                            LastName = lastName,
+                            Address = address,
+                            City = city,
+                            State = state,
+                            Zip = zip,
+                            PhoneNumber = phoneNumber,
+                            Email = email
+                        };
+                        listContacts.Add(contacts);
+                        break;
+                    
+
+                }
+            }
+            foreach(Contacts contacts1 in listContacts)
+            {
+                Console.WriteLine("First name :" + contacts1.FirstName);
+            }
+              
             void GetUserData()
             {
                 Console.WriteLine("Enter First Name");

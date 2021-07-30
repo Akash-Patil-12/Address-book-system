@@ -24,7 +24,7 @@ namespace Address_Book_System
         public void CheckContactAvaible(List<Contacts> listContacts)
         {
             checkContacts = false;
-            Console.WriteLine("Enter first name");
+            Console.WriteLine("Enter first name to check record");
             firstName = Console.ReadLine();
             foreach(Contacts contacts in listContacts)
             {
@@ -74,6 +74,38 @@ namespace Address_Book_System
             }
             if (checkContacts == false)
                 Console.WriteLine("Record not found");
+        }
+        /// <summary>
+        /// Add multiple person record 
+        /// </summary>
+        /// <param name="listContacts"></param>
+        public void AddMultiplePerson(List<Contacts> listContacts)
+        {
+            Console.WriteLine("How many person do you want to add");
+            int personCount = Convert.ToInt32(Console.ReadLine());
+            for (int count = 0; count < personCount; count++)
+            {
+                Contacts contacts = new Contacts();
+                Console.WriteLine("Fill record of person :" + count + 1);
+                Console.WriteLine("Enter First Name");
+                contacts.FirstName = Console.ReadLine();
+                Console.WriteLine("Enter Last Name");
+                contacts.LastName = Console.ReadLine();
+                Console.WriteLine("Enter address");
+                contacts.Address = Console.ReadLine();
+                Console.WriteLine("Enter city");
+                contacts.City = Console.ReadLine();
+                Console.WriteLine("Enter state");
+                contacts.State = Console.ReadLine();
+                Console.WriteLine("Enter zip code");
+                contacts.Zip = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine("Enter phone number");
+                contacts.PhoneNumber = Convert.ToInt64(Console.ReadLine());
+                Console.WriteLine("Enter email");
+                contacts.Email = Console.ReadLine();
+                Console.WriteLine("Person added successully...");
+                listContacts.Add(contacts);
+            }
         }
         /// <summary>
         /// Show all record of contacts

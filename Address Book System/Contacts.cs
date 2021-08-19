@@ -69,7 +69,7 @@ namespace Address_Book_System
                 Console.WriteLine("Record deleted successfully............");
             }
             else
-            Console.WriteLine("Record not found.............");
+                Console.WriteLine("Record not found.............");
         }
         /// <summary>
         /// Add multiple person record 
@@ -87,10 +87,10 @@ namespace Address_Book_System
                 Console.WriteLine("Enter First Name");
                 contacts.FirstName = Console.ReadLine();
                 var personNameData = contactsUniqueList.Where(x => x.Key.Contains(contacts.FirstName));
-                if (personNameData.ToList().Count!=0)
+                if (personNameData.ToList().Count != 0)
                 {
                     Console.WriteLine("............This name is already present try with other name...........");
-                    count = (count-1);
+                    count = (count - 1);
                 }
                 else
                 {
@@ -123,12 +123,13 @@ namespace Address_Book_System
             int count = 1;
             if ((contactsUniqueList.Count) > 0)
             {
-                foreach (KeyValuePair < string,List<Contacts>> contacts1 in contactsUniqueList)
+                foreach (KeyValuePair<string, List<Contacts>> contacts1 in contactsUniqueList)
                 {
                     foreach (Contacts contacts in contacts1.Value)
                     {
+
                         Console.WriteLine("........Contact Record :" + count + ".........");
-                        Console.WriteLine("Record of :"+contacts1.Key);
+                        Console.WriteLine("Record of :" + contacts1.Key);
                         Console.WriteLine("First name :" + contacts.FirstName);
                         Console.WriteLine("Last name :" + contacts.LastName);
                         Console.WriteLine("Address :" + contacts.Address);
@@ -144,6 +145,33 @@ namespace Address_Book_System
             }
             else
                 Console.WriteLine("Contacts record is empty...........");
+        }
+        /// <summary>
+        /// Display person name according to specific city or state
+        /// </summary>
+        /// <param name="contactsUniqueList"></param>
+        public void DisplayPersonName(Dictionary<string, List<Contacts>> contactsUniqueList)
+        {
+            if (contactsUniqueList.Count > 0)
+            {
+                Console.WriteLine("Enter City or State Name to search person");
+                string searchCityOrState = Console.ReadLine();
+                List<Contacts> listPerson = null;
+                foreach (KeyValuePair<string, List<Contacts>> contacts1 in contactsUniqueList)
+                {
+                    listPerson = contacts1.Value;
+                }
+                var filterPerson = listPerson.Where(x => x.City.Equals(searchCityOrState) || x.State.Equals(searchCityOrState));
+                Console.WriteLine(".......Person Name in City or State name is :" + searchCityOrState + ".......");
+                foreach (var personName in filterPerson)
+                {
+                    Console.WriteLine("Person Name : " + personName.FirstName);
+                }
+            }
+            else
+            {
+                Console.WriteLine("Record is empty................");
+            }
         }
     }
 }

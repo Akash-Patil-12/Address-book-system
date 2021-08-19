@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Address_Book_System
@@ -51,7 +52,7 @@ namespace Address_Book_System
             }
             else
             {
-                Console.WriteLine("Record not found..");
+                Console.WriteLine("Record not found............");
             }
         }
         /// <summary>
@@ -65,10 +66,10 @@ namespace Address_Book_System
             if (contactsUniqueList.ContainsKey(firstName))
             {
                 contactsUniqueList.Remove(firstName);
-                Console.WriteLine("Record deleted successfully...");
+                Console.WriteLine("Record deleted successfully............");
             }
             else
-            Console.WriteLine("Record not found");
+            Console.WriteLine("Record not found.............");
         }
         /// <summary>
         /// Add multiple person record 
@@ -76,7 +77,7 @@ namespace Address_Book_System
         /// <param name="contactsUniqueList"></param>
         public void AddMultiplePerson(Dictionary<string, List<Contacts>> contactsUniqueList)
         {
-            Console.WriteLine("How many person do you want to add");
+            Console.WriteLine("How many person do you want to add ?");
             int personCount = Convert.ToInt32(Console.ReadLine());
             for (int count = 0; count < personCount; count++)
             {
@@ -85,9 +86,10 @@ namespace Address_Book_System
                 Console.WriteLine("Fill record of person :" + (count + 1));
                 Console.WriteLine("Enter First Name");
                 contacts.FirstName = Console.ReadLine();
-                if (contactsUniqueList.ContainsKey(contacts.FirstName))
+                var personNameData = contactsUniqueList.Where(x => x.Key.Contains(contacts.FirstName));
+                if (personNameData.ToList().Count!=0)
                 {
-                    Console.WriteLine("This name is already present try with other name...");
+                    Console.WriteLine("............This name is already present try with other name...........");
                     count = (count-1);
                 }
                 else
@@ -125,7 +127,7 @@ namespace Address_Book_System
                 {
                     foreach (Contacts contacts in contacts1.Value)
                     {
-                        Console.WriteLine("...Contact Record :" + count + "...");
+                        Console.WriteLine("........Contact Record :" + count + ".........");
                         Console.WriteLine("Record of :"+contacts1.Key);
                         Console.WriteLine("First name :" + contacts.FirstName);
                         Console.WriteLine("Last name :" + contacts.LastName);
@@ -141,7 +143,7 @@ namespace Address_Book_System
                 }
             }
             else
-                Console.WriteLine("Contacts record is empty");
+                Console.WriteLine("Contacts record is empty...........");
         }
     }
 }

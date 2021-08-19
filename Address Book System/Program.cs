@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Address_Book_System
 {
@@ -17,6 +18,7 @@ namespace Address_Book_System
             Dictionary<string, List<Contacts>> contactsUniqueList = new Dictionary<string, List<Contacts>>();
             while (true)
             {
+                Console.WriteLine("................................................");
                 Console.WriteLine("Press 1 : Add new contacts to Address Book");
                 Console.WriteLine("Press 2 : Edit existing contact");
                 Console.WriteLine("Press 3 : Delete contact");
@@ -24,6 +26,7 @@ namespace Address_Book_System
                 Console.WriteLine("Press 5 : Show all contacts");
                 Console.WriteLine("Press 0 : to Stop Execution");
                 Console.WriteLine("Enter your choice");
+                Console.WriteLine("................................................");
                 userChoice = Convert.ToInt32(Console.ReadLine());
                 if (userChoice == EXIT)
                     break;
@@ -31,19 +34,6 @@ namespace Address_Book_System
                 {
                     case ADD_NEW_CONTACTS:
                         GetUserData();
-                        Contacts contacts = new Contacts()
-                        {
-                            FirstName = firstName,
-                            LastName = lastName,
-                            Address = address,
-                            City = city,
-                            State = state,
-                            Zip = zip,
-                            PhoneNumber = phoneNumber,
-                            Email = email
-                        };
-                        listContacts.Add(contacts);
-                        contactsUniqueList.Add(contacts.FirstName,listContacts);
                         break;
                     case EDIT_CONTACTS:
                         Contacts contact = new Contacts();
@@ -70,20 +60,41 @@ namespace Address_Book_System
             {
                 Console.WriteLine("Enter First Name");
                 firstName = Console.ReadLine();
-                Console.WriteLine("Enter Last Name");
-                lastName = Console.ReadLine();
-                Console.WriteLine("Enter address");
-                address = Console.ReadLine();
-                Console.WriteLine("Enter city");
-                city = Console.ReadLine();
-                Console.WriteLine("Enter state");
-                state = Console.ReadLine();
-                Console.WriteLine("Enter zip code");
-                zip = Convert.ToInt32(Console.ReadLine());
-                Console.WriteLine("Enter phone number");
-                phoneNumber = Convert.ToInt64(Console.ReadLine());
-                Console.WriteLine("Enter email");
-                email = Console.ReadLine();
+                var personNameData = contactsUniqueList.Where(x => x.Key.Contains(firstName));
+                if (personNameData.ToList().Count!= 0)
+                {
+                    Console.WriteLine("............This name is already present try with other name...........");
+                }
+                else
+                {
+                    Console.WriteLine("Enter Last Name");
+                    lastName = Console.ReadLine();
+                    Console.WriteLine("Enter address");
+                    address = Console.ReadLine();
+                    Console.WriteLine("Enter city");
+                    city = Console.ReadLine();
+                    Console.WriteLine("Enter state");
+                    state = Console.ReadLine();
+                    Console.WriteLine("Enter zip code");
+                    zip = Convert.ToInt32(Console.ReadLine());
+                    Console.WriteLine("Enter phone number");
+                    phoneNumber = Convert.ToInt64(Console.ReadLine());
+                    Console.WriteLine("Enter email");
+                    email = Console.ReadLine();
+                    Contacts contacts = new Contacts()
+                    {
+                        FirstName = firstName,
+                        LastName = lastName,
+                        Address = address,
+                        City = city,
+                        State = state,
+                        Zip = zip,
+                        PhoneNumber = phoneNumber,
+                        Email = email
+                    };
+                    listContacts.Add(contacts);
+                    contactsUniqueList.Add(contacts.FirstName, listContacts);
+                }
             }
         }       
     }

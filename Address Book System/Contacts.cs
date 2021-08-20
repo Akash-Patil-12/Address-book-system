@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 
@@ -225,6 +226,60 @@ namespace Address_Book_System
             else
             {
                 Console.WriteLine("Record is empty................");
+            }
+        }
+        /// <summary>
+        /// Write data to text file
+        /// </summary>
+        /// <param name="contactsUiqueList"></param>
+        /// <param name="filePath"></param>
+        public void ContactsWriteInTextFile(Dictionary<string, List<Contacts>> contactsUiqueList,string filePath)
+        {
+            int count = 1;
+            if (contactsUiqueList.Count > 0)
+            {
+                using (StreamWriter streamWriter = new StreamWriter(filePath))
+                {
+                    Console.WriteLine("........Writing data to text file..........");
+                    foreach (KeyValuePair<string, List<Contacts>> contacts1 in contactsUiqueList)
+                    {
+                        foreach (Contacts contacts in contacts1.Value)
+                        {
+                            streamWriter.WriteLine("........Contact Record "+count+".........");
+                            streamWriter.WriteLine("First name :" + contacts.FirstName);
+                            streamWriter.WriteLine("Last name :" + contacts.LastName);
+                            streamWriter.WriteLine("Address :" + contacts.Address);
+                            streamWriter.WriteLine("City :" + contacts.City);
+                            streamWriter.WriteLine("State :" + contacts.State);
+                            streamWriter.WriteLine("Zip :" + contacts.Zip);
+                            streamWriter.WriteLine("Phone Number :" + contacts.PhoneNumber);
+                            streamWriter.WriteLine("Email :" + contacts.Email);
+                            count++;
+                        }
+                    }
+                    streamWriter.Close();
+                }
+                Console.WriteLine("............Record Added Successfully.............");               
+            }
+            else
+            {
+                Console.WriteLine("Record is empty................");
+            }
+        }
+        /// <summary>
+        /// Reading text file data and display on console
+        /// </summary>
+        /// <param name="filePath"></param>
+        public void ReadTextFileData(string filePath)
+        {
+            Console.WriteLine("...........Data of Text File is ............");
+            using (StreamReader file = new StreamReader(filePath))
+            {
+                string line;
+                while ((line = file.ReadLine()) != null)
+                {
+                    Console.WriteLine(line);
+                }
             }
         }
         public override string ToString()

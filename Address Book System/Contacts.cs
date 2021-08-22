@@ -282,6 +282,36 @@ namespace Address_Book_System
                 }
             }
         }
+        public  void SortData(Dictionary<string, List<Contacts>> contactsUniqueList)
+        {
+            List<Contacts> listData = new List<Contacts>();
+            foreach (var list in contactsUniqueList)
+            {
+                foreach (var item in list.Value)
+                {
+                    listData.Add(item);
+                }
+            }
+            Console.WriteLine("-----------------------------------");
+            Console.WriteLine("\nDisplaying the list based on zipcode");
+            foreach (var item in listData.OrderBy(detail => detail.Zip))
+            {
+                Console.WriteLine(item.ToString());
+            }
+            Console.WriteLine("-----------------------------------");
+            Console.WriteLine("\nDisplaying the list based on state");
+            foreach (var item in listData.OrderBy(detail => detail.State))
+            {
+                Console.WriteLine(item.ToString());
+            }
+            Console.WriteLine("-----------------------------------");
+            Console.WriteLine("\nDisplaying the list based on city");
+            foreach (var item in listData.OrderBy(detail => detail.City))
+            {
+               Console.WriteLine(item.ToString());
+            }
+        }
+
         public override string ToString()
         {
             return" First Name : "+ this.FirstName+" \n Last Name : "+this.LastName+" \n Address : "+this.Address+"\n City : "+this.City+"\n State : "+this.State+"\n Zip : "+this.Zip+"\n PhoneNumber : "+this.PhoneNumber+"\n Email : "+this.Email;

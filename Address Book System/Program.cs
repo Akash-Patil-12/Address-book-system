@@ -13,7 +13,8 @@ namespace Address_Book_System
             int zip,userChoice;
             long phoneNumber;
             //constants
-            const int EXIT = 0, ADD_NEW_CONTACTS = 1, EDIT_CONTACTS = 2,DELETE_CONTACTS=3,ALL_CONTACTS=5,ADD_MULTIPLE_RECORDS=4,DISPLAY_PERSON=6,COUNT_PERSONS=7,SORT_PERSON_NAME=8,WRITE_TO_FILE=9,READ_FILE_TEXT=10;
+            const int EXIT = 0, ADD_NEW_CONTACTS = 1, EDIT_CONTACTS = 2,DELETE_CONTACTS=3,ALL_CONTACTS=5,ADD_MULTIPLE_RECORDS=4,DISPLAY_PERSON=6,COUNT_PERSONS=7,
+                SORT_PERSON_NAME=8,WRITE_TO_FILE=9,READ_FILE_TEXT=10,SORT_USER_CHOICE=11;
             const string TEXT_FILE = @"H:\dot net\Address-book-system\Address Book System\PersonContacts.txt";
             List<Contacts> listContacts = new List<Contacts>();
             Dictionary<string, List<Contacts>> contactsUniqueList = new Dictionary<string, List<Contacts>>();
@@ -30,6 +31,7 @@ namespace Address_Book_System
                 Console.WriteLine("Press 8 : Sort entries by Person's name");
                 Console.WriteLine("Press 9 : Write data to Text File");
                 Console.WriteLine("Press 10 : Read data from Text File");
+                Console.WriteLine("Press 11 : Sort data according to user choice");
                 Console.WriteLine("Press 0 : To Stop Execution");
                 Console.WriteLine("Enter your choice");
                 Console.WriteLine(".........................................................");
@@ -76,6 +78,10 @@ namespace Address_Book_System
                     case READ_FILE_TEXT:
                         Contacts contactReadFile = new Contacts();
                         contactReadFile.ReadTextFileData(TEXT_FILE);
+                        break;
+                    case SORT_USER_CHOICE:
+                        Contacts contactUserChoice = new Contacts();
+                        contactUserChoice.SortData(contactsUniqueList);
                         break;
                     default:
                         Console.WriteLine("Enter a right choice");
